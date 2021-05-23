@@ -7,6 +7,11 @@ use skh6075\s3ditemtools\skin\SkinFactory;
 use function is_dir;
 use function mkdir;
 use const DIRECTORY_SEPARATOR;
+use InvalidArgumentException;
+use InvalidStateException;
+use RuntimeException;
+use pocketmine\utils\TextFormat;
+
 
 class S3DItemToolS extends PluginBase{
 
@@ -28,6 +33,9 @@ class S3DItemToolS extends PluginBase{
         if (self::$instance === null) {
             self::$instance = $this;
         }
+        if (!extension_loaded("gd")) {
+			throw new PluginException("GD library is not enabled! Please uncomment gd2 in php.ini!");
+	}
     }
 
     public function onEnable(): void{
